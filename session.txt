@@ -1,0 +1,1 @@
+{'username': 'emmaakachukwu', 'password': '111111', 'email': 'emmanuelakachukwu1@gmail.com', 'full_name': 'Emmanuel Akachukwu', 'login_time': datetime.datetime(2020, 5, 7, 7, 14, 9, 65898)}
