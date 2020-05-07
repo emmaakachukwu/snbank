@@ -1,1 +1,1 @@
-{"account_name": "emmanuel akachukwu", "opening_balance": "10000", "account_type": "savings", "account_email": "emmanuelakachukwu1@gmail.com", "account_number": "1264575087"}
+[{"account_name": "emmanuel akachukwu", "opening_balance": "200000", "account_type": "savings", "account_email": "emmanuelakachukwu1@gmail.com", "account_number": "8274439686"}, {"account_name": "ace manuel", "opening_balance": "1000000", "account_type": "current", "account_email": "acemanuel01@gmail.com", "account_number": "6685086461"}]

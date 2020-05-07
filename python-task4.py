@@ -31,16 +31,14 @@ if option == "1":
                 f.close()
                 
                 while True:
-                    print("1. Create new bank account")
-                    print("2. Check Account Details")
-                    print("3. Logout")
+                    print("What do you want to do? \n 1. Create new bank account \n 2. Check Account Details \n 3. Logout")
                     sessionOption = input("Select an option: ")
 
                     if sessionOption == "1":
                         account_name = input("Enter account name: ")
-                        opening_balance = input("Enter your opening balance: ")
+                        opening_balance = input("Enter opening balance: ")
                         account_type = input("Enter account type: ")
-                        account_email = input("Enter account email ")
+                        account_email = input("Enter account email: ")
                         account_number = str(random.randint(1000000000, 9999999999))
 
                         account_details = {
@@ -48,38 +46,49 @@ if option == "1":
                             "opening_balance": opening_balance,
                             "account_type": account_type,
                             "account_email": account_email,
-                            "account_number": account_number
+                            "account_number": account_number,
                         }
 
-                        f = open("customer.txt", "w")
-                        json.dump(account_details, f)
+                        f = open("customer.txt", "r")
+                        user_accounts = f.read()
                         f.close()
-                        print(f"Account creation successfull. Here is your new account number: {account_number}")
+                        if user_accounts == "":
+                            list_accounts = []
+                            list_accounts.append(account_details)
+                            f = open("customer.txt", "w")
+                            json.dump(list_accounts, f)
+                        else:
+                            list_accounts = json.loads(user_accounts)
+                            list_accounts.append(account_details)
+                            f = open("customer.txt", "w")
+                            json.dump(list_accounts, f)
+                        f.close()
+                        print(f"Account creation successfull. Account number: {account_number}")
                         continue
                     elif sessionOption == "2":
                         account_number = input("Enter your account number: ")
 
                         f = open("customer.txt", "r")
-                        accounts = json.loads(f.read())
-                        f.close()
-
-                        for account in accounts:
-                            print(account)
-                            exit
-                            if accounts['account_number'] == account_number:
-                                print(f"Account name: {account['account_name']} \n Opening Balance: {account['opening_balance']} \n Account type: {account['account_type']} \n Account email: {account['account_email']}")
-                                break
+                        list_accounts = f.read()
+                        if list_accounts == "":
+                            print(f"Account number {account_number} not found")
+                            continue
+                        else:
+                            accounts = json.loads(list_accounts)
+                            f.close()
+                            for account in accounts:
+                                if account['account_number'] == account_number:
+                                    print(f"Account Details: \n Account name: {account['account_name']} \n Opening Balance: {account['opening_balance']} \n Account type: {account['account_type']} \n Account email: {account['account_email']}")
+                                    break
                             else:
                                 print(f"Account number {account_number} not found")
-                                break
                     elif sessionOption == "3":
                         os.remove("session.txt")
                         break
                     else:
                         continue
                 break
-            else:
-                print("That did not work. Try again.")
-                break
+        else:
+            print("That did not work. Try again.")
 else:
     print("App closed")
